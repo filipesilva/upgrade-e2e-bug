@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
 
@@ -20,6 +22,22 @@
   </head>
 
   <body>
-    <my-app>Loading...</my-app>
+    <hero-app>
+      <!-- #docregion usecomponent -->
+      <div ng-controller="MainController as mainCtrl">
+        <hero-detail [hero]="mainCtrl.hero"
+                     (deleted)="mainCtrl.onDelete($event)">
+        </hero-detail>
+      </div>
+      <!-- #enddocregion usecomponent -->
+      <!-- #docregion userepeatedcomponent -->
+      <div ng-controller="MainController as mainCtrl">
+        <hero-detail [hero]="hero"
+                     (deleted)="mainCtrl.onDelete($event)"
+                     ng-repeat="hero in mainCtrl.heroes">
+        </hero-detail>
+      </div>
+      <!-- #enddocregion userepeatedcomponent-->
+    </hero-app>
   </body>
 </html>
